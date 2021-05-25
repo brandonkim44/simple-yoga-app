@@ -9,15 +9,14 @@
  */
 
  import React from 'react';
- import {
-   SafeAreaView,
-   StatusBar,
-   useColorScheme,
- } from 'react-native';
+ import { SafeAreaView, StatusBar, useColorScheme } from 'react-native';
+ import HomeScreen from './src/screens/HomeScreen/home';
+ import { Colors } from 'react-native/Libraries/NewAppScreen';
+ import 'react-native-gesture-handler';
+ import { NavigationContainer } from '@react-navigation/native';
+ import { createStackNavigator } from '@react-navigation/stack';
 
- import {
-   Colors,
- } from 'react-native/Libraries/NewAppScreen';
+ const Stack = createStackNavigator();
 
  const App = () => {
    const isDarkMode = useColorScheme() === 'dark';
@@ -27,10 +26,22 @@
    };
 
    return (
-     <SafeAreaView style={backgroundStyle}>
-       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-     </SafeAreaView>
+     <NavigationContainer>
+        <SafeAreaView style={backgroundStyle}>
+          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{}}
+              />
+            </Stack.Navigator>
+            
+        </SafeAreaView>
+     </NavigationContainer>
    );
  };
+
+//  const AppContainer = createAppContainer(bottomNavBar);
 
  export default App;
